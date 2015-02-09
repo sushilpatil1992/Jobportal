@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AspNetGroupBasedPermissions.Models.Jobpost>
+
+@{
+    ViewBag.Title = "Jobs";
+}
+
+
+
+
+
+<div data-role="header">
+<nav data-role="navbar">
+    <ul>
+        @if (User.IsInRole("Employee"))
+        {
+
+            <li> @Html.ActionLink("Create New", "Create",new{profileId=ViewBag.ProfileId})</li>
+
+        }
+       
+    </ul>
+</nav>
+</div>
+
+<div data-role="content">
+    <ul data-role="listview" data-filter="true" class="my_class_list">
+
+        @foreach (var item in Model)
+        {
+
+            <li>
+
+                <a href="@Url.Action("Details", new {item.Id})">
+
+                    <h3>@Html.DisplayFor(modelItem => item.JobTitle)</h3>
+
+                    <p>@Html.DisplayFor(modelItem => item.JobPostDate) - @Html.DisplayFor(modelItem => item.Company_Name) </p>
+
+                </a>
+
+            </li>
+
+        }   
+
+    </ul>
+    </div>
+
+   
+    

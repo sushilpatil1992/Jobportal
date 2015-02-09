@@ -1,0 +1,37 @@
+﻿@{
+    
+    ViewBag.Title = "Contacts";
+}
+
+
+
+   
+<div data-role="content">
+   
+   
+        @if (User.IsInRole("Employee"))
+        {
+
+            <a href="@Url.Action("EmployeeProfile","Jobposts")" data-role="button" data-icon="user">Profile</a>
+            <a href="@Url.Action("Index","Jobposts")" data-role="button" data-icon="edit">Post Job</a>
+
+        }
+        @if (User.IsInRole("Jobseeker"))
+        {
+
+            <a href="@Url.Action("Index","Profile")" data-role="button" data-icon="user">Profile</a>
+
+        }
+        @if (!Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Login","Account")" data-role="button" data-icon="gear">Login</a>
+        }
+    <a href="@Url.Action("SearchJob","Home")" data-role="button" data-icon="search carat-r">Search Job</a>
+    <a href="@Url.Action("About","Home")" data-role="button" data-icon="info">About</a>
+    <a href="@Url.Action("Contact","Home")" data-role="button" data-icon="phone">Contact</a>
+    <a href="@Url.Action("InterviewTips","Home")" data-role="button" data-icon="tag">Interview Tips</a>
+
+
+
+</div>
+

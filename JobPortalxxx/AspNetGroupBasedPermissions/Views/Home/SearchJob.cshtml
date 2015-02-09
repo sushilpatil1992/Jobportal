@@ -1,0 +1,131 @@
+﻿@model IEnumerable<AspNetGroupBasedPermissions.Models.Jobpost>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>@ViewData["Message"]</h3>
+@using (Html.BeginForm("SearchJob","Home",FormMethod.Get))
+{
+    <p>
+        Company: @Html.DropDownList("companyName", "All")
+        Location: @Html.DropDownList("location", "All")
+        Language: @Html.TextBox("language") 
+        
+        <br />
+        <br />
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<h2>Jobs</h2>
+<table class="table">
+    <tr>
+        <th>
+            Company Name
+        </th>
+
+        <th>
+            Posts
+
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.JobPostExpDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.JobPostExpDate > DateTime.Now)
+        { 
+        <tr>
+            <td>
+                <h3> @Html.DisplayFor(modelItem => item.Company_Name)</h3>
+
+                <p>Posted On: @Html.DisplayFor(modelItem => item.JobPostDate)</p>
+                <p>Location: @Html.DisplayFor(modelItem => item.JobLocation)</p>
+            </td>
+
+
+            <td>
+
+                @Html.DisplayFor(modelItem => item.JobTitle)
+                <p>Vacancies: @Html.DisplayFor(modelItem => item.Vacancy)</p>
+                <p>Experience:@Html.DisplayFor(modelItem => item.MinExperince) to @Html.DisplayFor(modelItem => item.MaxExperince) Years</p>
+                <p>Salary: @Html.DisplayFor(modelItem => item.MinSal) - @Html.DisplayFor(modelItem => item.MaxSal)</p>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobPostExpDate)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+    }
+
+</table>
+
+<h3 class="alert-danger">Expired posts</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Company Name
+        </th>
+
+        <th>
+            Posts
+
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.JobPostExpDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.JobPostExpDate<DateTime.Now)
+        { 
+        <tr>
+            <td>
+                <h3> @Html.DisplayFor(modelItem => item.Company_Name)</h3>
+
+                <p>Posted On: @Html.DisplayFor(modelItem => item.JobPostDate)</p>
+                <p>Location: @Html.DisplayFor(modelItem => item.JobLocation)</p>
+            </td>
+
+
+            <td>
+
+                @Html.DisplayFor(modelItem => item.JobTitle)
+                <p>Vacancies: @Html.DisplayFor(modelItem => item.Vacancy)</p>
+                <p>Experience:@Html.DisplayFor(modelItem => item.MinExperince) to @Html.DisplayFor(modelItem => item.MaxExperince) Years</p>
+                <p>Salary: @Html.DisplayFor(modelItem => item.MinSal) - @Html.DisplayFor(modelItem => item.MaxSal)</p>
+
+            </td>
+
+            <td class="text-danger">
+                @Html.DisplayFor(modelItem => item.JobPostExpDate)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+        }
+    }
+
+</table>
+
+
+
+

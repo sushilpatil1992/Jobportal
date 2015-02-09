@@ -1,0 +1,135 @@
+﻿@model AspNetGroupBasedPermissions.Models.Jobpost
+
+@{
+    
+    
+}
+
+<h2 class="col-md-10 col-md-offset-1">Details</h2>
+
+<div class="col-md-10 col-md-offset-1">
+
+    <hr />
+    <div class="dl-horizontal ">
+
+        <p class="text-center">
+            <b>@Html.DisplayFor(model => model.JobTitle)</b>
+        </p>
+        <p class="alert-danger">
+            <b>@Html.DisplayNameFor(model => model.JobDiscription):</b>
+        </p>
+        <p>
+            @Html.Raw(Html.Encode(Model.JobDiscription).Replace(Environment.NewLine, "<br />"))
+
+        </p>
+
+        <p>
+            <b>Experince:</b>
+            @Html.DisplayFor(model => model.MinExperince) to @Html.DisplayFor(model => model.MaxExperince)
+        </p>
+
+        <p>
+
+            <b>Salary:</b>
+            @Html.DisplayFor(model => model.MinSal) to @Html.DisplayFor(model => model.MaxSal)
+
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.Vacancy):</b>
+
+            @Html.DisplayFor(model => model.Vacancy)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.JobLocation):</b>
+
+            @Html.DisplayFor(model => model.JobLocation)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.Industry):</b>
+
+            @Html.DisplayFor(model => model.Industry)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.Company_Name):</b>
+
+            @Html.DisplayFor(model => model.Company_Name)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.ContactPerson):</b>
+
+            @Html.DisplayFor(model => model.ContactPerson)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.Mobile):</b>
+
+            @Html.DisplayFor(model => model.Mobile)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.JobPostDate):</b>
+            @Html.DisplayFor(model => model.JobPostDate)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.JobPostExpDate):</b>
+
+            @Html.DisplayFor(model => model.JobPostExpDate)
+        </p>
+        </br>
+        </br>
+
+        <p class ="alert-danger">
+            
+            <b>@Html.DisplayNameFor(model => model.company_profile):</b>
+            </p>
+            <p>
+                @Html.Raw(Html.Encode(Model.company_profile).Replace(Environment.NewLine, "<br />"))
+            </p>
+
+
+
+
+
+</div>
+    <div >
+        
+
+        @if (User.IsInRole("Jobseeker") && Request.IsAuthenticated)
+        {
+            if (ViewBag.Message == null)
+            {
+                <a href="@Url.Action("Apply", new { id = Model.Id})" class="btn btn-default">Apply</a>
+            }
+            else if (Model.JobPostExpDate < DateTime.Now)
+            {
+                <b class ="alert-danger">Post is expired</b>
+            }
+            else
+            {
+                <b>@ViewBag.Message</b>
+            }
+
+        }
+        @if (!Request.IsAuthenticated)
+        {
+
+            if (Model.JobPostExpDate < DateTime.Now)
+            {
+                <b class="alert-danger">Post is expired</b>
+
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Account")" class="btn btn-default">Apply</a>
+            }
+        }
+        
+        <a href="@Url.Action( "SearchJob")" class="btn btn-default">Back to List</a>
+    </div>
+</divcol-md-10>

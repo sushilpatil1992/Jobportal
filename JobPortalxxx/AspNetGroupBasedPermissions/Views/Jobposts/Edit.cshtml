@@ -1,0 +1,138 @@
+﻿@model AspNetGroupBasedPermissions.Models.Jobpost
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Jobpost</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group col-md-4" >
+            @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label " })
+
+            <div>
+                @Html.EditorFor(model => model.JobTitle, new { @class = "form-control" })
+
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.Label("Experince:", htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.MaxExperince, new { @size = "5", @placeholder = "0 to 100" })
+
+
+                to
+                @Html.TextBoxFor(model => model.MinExperince, new { @size = "5", @placeholder = "0 to 100" })
+
+                Years
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.Label("Salary:", htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.MinSal, new { @size = "5" })
+
+
+                To
+                @Html.TextBoxFor(model => model.MaxSal, new { @size = "5" })
+
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.JobDiscription, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextAreaFor(model => model.JobDiscription, new { @class = "form-control", @rows = "10" })
+                @Html.ValidationMessageFor(model => model.JobDiscription)
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Vacancy, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.EditorFor(model => model.Vacancy)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.JobLocation, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.JobLocation)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Industry, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextBoxFor(model => model.Industry)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Company_Name, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextBoxFor(model => model.Company_Name)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.ContactPerson, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextBoxFor(model => model.ContactPerson)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.Mobile, new { @placeholder = "Mobile Number" })
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.JobPostExpDate, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.JobPostExpDate, new { @placeholder = "DD/MM/YYYY" })
+            </div>
+        </div>
+        <div class="form-group col-md-10">
+            @Html.LabelFor(model => model.company_profile, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextAreaFor(model => model.company_profile, new {@cols = "50  ", @rows = "10", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.company_profile)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

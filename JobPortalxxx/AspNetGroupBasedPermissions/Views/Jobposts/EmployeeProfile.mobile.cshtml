@@ -1,0 +1,81 @@
+﻿@model AspNetGroupBasedPermissions.Models.EmpProfile
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Profile</h2>
+
+   
+    <a href="javascript:document.getElementById('logoutForm').submit()" class="ui-btn ui-btn-inline ui-icon-power ui-btn-icon-left ui-corner-all ui-shadow">Log off</a>
+    
+
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MobNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MobNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Company)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Company)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Industry)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Industry)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-offset-1">
+        <a href="@Url.Action("EditEmpProfile", new { id = ViewBag.ProfileId})" class="btn btn-default">Edit</a>
+    </div>

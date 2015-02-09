@@ -1,0 +1,153 @@
+﻿@model AspNetGroupBasedPermissions.Models.Jobpost
+
+@{
+    ViewBag.Title = "Create";
+    var profile = "Hello";
+    Dictionary<string, object> textarea = new Dictionary<string, object>();
+    textarea.Add("rows", "10");
+    textarea.Add("Value",profile);
+}
+
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Jobpost</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group col-md-4">
+           
+                @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label " })
+
+            <div>
+                @Html.EditorFor(model => model.JobTitle, new { @class = "form-control" })
+                
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.Label("Experince:", htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.MaxExperince, new { @size = "5",@placeholder="0 to 100" })
+               
+
+                to
+                @Html.TextBoxFor(model => model.MinExperince, new { @size = "5",@placeholder="0 to 100" })
+             
+                Years
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.Label("Salary:", htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.MinSal, new { @size = "5" })
+                
+         
+                    To
+                @Html.TextBoxFor(model => model.MaxSal, new { @size = "5" })
+                
+            </div>
+        </div>
+        
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.JobDiscription, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextAreaFor(model => model.JobDiscription, new { @class = "form-control", @rows = "10" })
+                @Html.ValidationMessageFor(model => model.JobDiscription)
+            </div>
+        </div>
+        
+      
+        
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Vacancy, htmlAttributes: new { @class = "control-label " })
+            <div >
+                @Html.EditorFor(model => model.Vacancy)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.JobLocation, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.JobLocation)
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Industry, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextBoxFor(model => model.Industry, new { @Value = ViewBag.Industry })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Company_Name, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextBoxFor(model => model.Company_Name, new { @Value = ViewBag.Company })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.ContactPerson, htmlAttributes: new { @class = "control-label " })
+            <div>
+                @Html.TextBoxFor(model => model.ContactPerson, new { @Value = ViewBag.Contact })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.Mobile, new { @Value = ViewBag.Mobile, @placeholder = "Mobile Number" })
+            </div>
+        </div>
+
+        
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.JobPostExpDate, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.TextBoxFor(model => model.JobPostExpDate, new { @placeholder = "DD/MM/YYYY" })
+            </div>
+         </div>
+            <div class="form-group col-md-10">
+                @Html.LabelFor(model => model.company_profile, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(model => model.company_profile,textarea)
+                    @Html.ValidationMessageFor(model => model.company_profile)
+                </div>
+            </div>
+        
+
+        <div class="form-group">
+            <div class=" col-md-3">
+                <input type="submit" value="Create" class="btn btn-default" />
+                <a href="@Url.Action( "Index")" class="btn btn-default">Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        $("#JobPostExpDate").datepicker({
+            
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>
+
+}
+
